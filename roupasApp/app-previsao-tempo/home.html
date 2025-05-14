@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugestão do Dia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="mensagem">Carregando...</div>
+
+    <script>
+        function getParametro(nome) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(nome) || '';
+        }
+
+        const nome = getParametro('nome');
+        const cidade = getParametro('cidade');
+        const clima = getParametro('clima');
+
+        let sugestao = '', lembrete = '', roupa = '';
+
+        switch (clima) {
+            case 'sol':
+                sugestao = 'Aproveite o dia ensolarado para sair!';
+                lembrete = 'Não esqueça o protetor solar e boné.';
+                roupa = 'Use roupas leves, óculos escuros e chapéu.';
+                break;
+            case 'frio':
+                sugestao = 'Um chocolate quente vai bem hoje!';
+                lembrete = 'Vista-se bem.';
+                roupa = 'Use casacos, cachecol, luvas e meias grossas.';
+                break;
+            case 'chuva':
+                sugestao = 'Ótimo dia para um filme ou livro.';
+                lembrete = 'Leve um guarda-chuva!';
+                roupa = 'Use capa de chuva, botas e roupas impermeáveis.';
+                break;
+            case 'vento':
+                sugestao = 'Evite locais abertos com muito vento.';
+                lembrete = 'Cuidado com objetos soltos.';
+                roupa = 'Use jaqueta corta-vento e prenda bem os cabelos.';
+                break;
+            case 'nuvens':
+                sugestao = 'Dia calmo, ideal para descansar.';
+                lembrete = 'Pode chover, fique atento.';
+                roupa = 'Roupas casuais com um agasalho leve.';
+                break;
+            default:
+                sugestao = 'Tenha um excelente dia!';
+                roupa = 'Vista-se como preferir, o clima está indefinido.';
+        }
+
+        document.getElementById('mensagem').innerHTML = `
+            <h2>Olá, ${nome}!</h2>
+            <p>Em sua cidade <strong>${cidade}</strong>, o clima está: <strong>${clima}</strong>.</p>
+            <p>${sugestao}</p>
+            <p><em>${lembrete}</em></p>
+            <p><strong>Sugestão de roupa:</strong> ${roupa}</p>
+        `;
+    </script>
+</body>
+</html>
